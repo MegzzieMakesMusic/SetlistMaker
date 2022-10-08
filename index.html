@@ -12,7 +12,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <script src="js/setlist.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -37,49 +36,6 @@
 
     </div>
     <script>
-        
-        const selector = $('#songPool');
-        const songButton = $('#songButton');
-        const setlist = $('#setlist');
-
-        function makeSelection() {
-            songButton.html("Add "+selector.val());
-        }
-
-        function addSong() {
-            song = lookupSong(selector.val());
-            console.log(song);
-            let html = `
-                <h3 class="setlistHeader"> ${song.Title}</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Key</th>
-                            <th scope="col">Length</th>
-                            <th scope="col">Genre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>${song.Key}</th>
-                        <td>${song.Length}</td>
-                        <td>${song.Genre}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            `;
-            $('#defaultMessage').hide();
-            setlist.append(html);
-        }
-
-        function lookupSong(song) {
-            songArray = songs.song;
-            for(var i = 0; i < songArray.length; i++) {
-                if(songArray[i].Title == song) {
-                    return songArray[i];
-                }
-            }
-        }
 
         const songs = {
             "song":[
@@ -165,11 +121,66 @@
             ]
             
         }
+        
+        const selector = $('#songPool');
+        const defaultOption = $('#songPool option:first');
+        const songButton = $('#songButton');
+        const setlist = $('#setlist');
+        const songArray = songs.song;
+
+        function makeSelection() {
+            songButton.html("Add "+selector.val());
+        }
+
+        function addSong() {
+            if(selector.val() == 0) {
+                alert("Choose a song from the list before hitting add!");
+                return;
+            }
+            song = lookupSong(selector.val());
+            let html = `
+                <h3 class="setlistHeader"> ${song.Title}</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Key</th>
+                            <th scope="col">Length</th>
+                            <th scope="col">Genre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>${song.Key}</th>
+                        <td>${song.Length}</td>
+                        <td>${song.Genre}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            `;
+            $('#defaultMessage').hide();
+            setlist.append(html);
+        }
+
+        function lookupSong(song) {
+            for(var i = 0; i < songArray.length; i++) {
+                if(songArray[i].Title == song) {
+                    $('#op'+i).hide();
+                    $("#target").val($("#target option:first").val());
+                    selector.val(defaultOption.val());
+                    songButton.html('Add Song');
+                    return songArray[i];
+                }
+            }
+        }
+
+        function buildSelect() {
+            for(var i = 0; i < songArray.length; i++) {
+                $('#songPool').append('<option id="op'+i+'" value="'+songArray[i].Title+'">'+songArray[i].Title+'</option>');
+            }
+        }
 
         $('document').ready(function() {
-            for(var i = 0; i < songs.song.length; i++) {
-                $('#songPool').append('<option value="'+songs.song[i].Title+'">'+songs.song[i].Title+'</option>');
-            }
+            buildSelect();
         });
 
     </script>
