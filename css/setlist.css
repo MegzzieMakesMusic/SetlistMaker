@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Butcherman&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+body {
+    height:100vh;
+    display:flex;
+    text-align:center;
+    background-image:url('../images/5937207.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center bottom;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+h1,h2 {
+    font-family: 'Butcherman', cursive;
+    font-size:48px;
+}
+
+select,
+option {
+    cursor:url('../images/finger.png'), auto;
+}
+
+#setlist {
+    max-width:500px;
+    margin:0 auto;
+}
