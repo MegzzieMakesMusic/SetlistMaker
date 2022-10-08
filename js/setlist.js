@@ -1,5 +1,6 @@
 $('document').ready(function() {
-    var songs = {
+
+    const songs = {
         "song":[
             {
                 "Title":"On My Own",
@@ -85,7 +86,7 @@ $('document').ready(function() {
     }
     console.log(songs);
     for(var i = 0; i < songs.song.length; i++) {
-        $('#songPool').append('<option>'+songs.song[i].Title+'</option>');
+        $('#songPool').append('<option value="'+songs.song[i].Title+'">'+songs.song[i].Title+'</option>');
     }
 
 });
