@@ -47,38 +47,130 @@
         }
 
         function addSong() {
+            song = lookupSong(selector.val());
+            console.log(song);
             let html = `
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        ${selector.val()}
-                    </button>
-                </h3>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Key</th>
-                                    <th scope="col">Length</th>
-                                    <th scope="col">Genre</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Song 1 Key</th>
-                                <td>Song 1 Length</td>
-                                <td>Song 1 Genre</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                <h3 class="setlistHeader"> ${song.Title}</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Key</th>
+                            <th scope="col">Length</th>
+                            <th scope="col">Genre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>${song.Key}</th>
+                        <td>${song.Length}</td>
+                        <td>${song.Genre}</td>
+                    </tr>
+                    </tbody>
+                </table>
             `;
             $('#defaultMessage').hide();
             setlist.append(html);
         }
+
+        function lookupSong(song) {
+            songArray = songs.song;
+            for(var i = 0; i < songArray.length; i++) {
+                if(songArray[i].Title == song) {
+                    return songArray[i];
+                }
+            }
+        }
+
+        const songs = {
+            "song":[
+                {
+                    "Title":"On My Own",
+                    "Key":"C",
+                    "Length":"3:55",
+                    "Genre":"Rock"
+                },
+                {
+                    "Title":"Darkness Sets In",
+                    "Key":"C Minor",
+                    "Length":"4:30",
+                    "Genre":"Rock"
+                },
+                {
+                    "Title":"Rage",
+                    "Key":"G",
+                    "Length":"4:54",
+                    "Genre":"Rock"
+                },
+                {
+                    "Title":"Cool Cat",
+                    "Key":"B",
+                    "Length":"3:01",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"Honey Brown",
+                    "Key":"A",
+                    "Length":"4:12",
+                    "Genre":"Rock"
+                },
+                {
+                    "Title":"High Vibe Information",
+                    "Key":"A Minor",
+                    "Length":"2:22",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"The Abyss",
+                    "Key":"G Minor",
+                    "Length":"3:19",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"Block That Bitch",
+                    "Key":"D",
+                    "Length":"3:33",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"Do You Feel?",
+                    "Key":"C",
+                    "Length":"3:41",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"We Got The Groove",
+                    "Key":"B Minor",
+                    "Length":"2:34",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"Barely Holding On",
+                    "Key":"C Minor",
+                    "Length":"4:01",
+                    "Genre":"Ballad"
+                },
+                {
+                    "Title":"Hope",
+                    "Key":"F",
+                    "Length":"2:55",
+                    "Genre":"Pop"
+                },
+                {
+                    "Title":"Pop Sugar",
+                    "Key":"F",
+                    "Length":"3:35",
+                    "Genre":"Pop"
+                }
+
+            ]
+            
+        }
+
+        $('document').ready(function() {
+            for(var i = 0; i < songs.song.length; i++) {
+                $('#songPool').append('<option value="'+songs.song[i].Title+'">'+songs.song[i].Title+'</option>');
+            }
+        });
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
